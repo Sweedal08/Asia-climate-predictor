@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asia Climate Predictor | AI Powered</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="glass-container">
+        <header>
+            <div class="header-logo">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                    <path d="M2 12h20"></path>
+                </svg>
+                <h1>Asia Climate</h1>
+            </div>
+            <p>Next-Gen Offline Forecasting Engine</p>
+        </header>
+
+        <main>
+            <div class="search-section">
+                <div class="custom-select">
+                    <input type="text" id="country-input" placeholder="Search Country..." autocomplete="off">
+                    <div class="options-container" id="country-options"></div>
+                </div>
+                <div class="custom-select">
+                    <input type="text" id="state-input" placeholder="Search State/Province..." autocomplete="off" disabled>
+                    <div class="options-container" id="state-options"></div>
+                </div>
+                <div class="custom-select">
+                    <input type="text" id="city-input" placeholder="Search City..." autocomplete="off" disabled>
+                    <div class="options-container" id="city-options"></div>
+                </div>
+                <button id="predict-btn" disabled>Predict Climate</button>
+            </div>
+
+            <div id="results" class="results-section hidden">
+                <div class="date-display" id="prediction-date">Loading...</div>
+                <h2 id="location-title">City, Country</h2>
+                
+                <div class="hero-weather">
+                    <div id="weather-icon-container">
+                        <!-- Dynamic SVG gets injected here -->
+                    </div>
+                    <div class="main-temp-wrapper">
+                        <span id="temperature">--</span><span class="celsius">°C</span>
+                    </div>
+                    <div id="weather-desc">Loading...</div>
+                </div>
+                
+                <div class="grid-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Feels Like</div>
+                            <div class="stat-value" id="feels-like">--°C</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Humidity</div>
+                            <div class="stat-value" id="humidity">--%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path></svg>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Wind (WSW)</div>
+                            <div class="stat-value" id="wind">-- km/h</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"></path><line x1="12" y1="12" x2="16" y2="8"></line></svg>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Pressure</div>
+                            <div class="stat-value" id="pressure">-- hPa</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">UV Index</div>
+                            <div class="stat-value" id="uv-index">--</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path></svg>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Air Quality (AQI)</div>
+                            <div class="stat-value" id="aqi">--</div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="forecast-section hourly">
+                    <h3>24-Hour Forecast</h3>
+                    <div class="hourly-grid" id="hourly-grid">
+                        <!-- Hourly items injected here -->
+                    </div>
+                </div>
+                
+                <div class="forecast-section">
+                    <h3>7-Day Forecast</h3>
+                    <div class="forecast-grid" id="forecast-grid">
+                        <!-- Forecast items injected here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

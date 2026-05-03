@@ -1,0 +1,21 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+env/
+venv/
+ENV/
+
+# Data
+data/raw/allCountries.zip
+data/database/asia_locations.db
+
+# Models (optional, but keep if small)
+# models/*.pkl
+
+# OS files
+.DS_Store
+Thumbs.db
